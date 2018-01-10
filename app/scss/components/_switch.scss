@@ -1,0 +1,35 @@
+.switch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  width: 20px;
+  background-color: $geyser;
+  color: $white;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+  margin: 0 5px;
+  @include focus-overlay;
+
+  &__value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    z-index: 1;
+  }
+  &__toggle {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: $lima;
+    top: 0;
+    transition: top 0.3s ease-in-out;
+
+    &--active {
+      top: 20px;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "timer-app",
+  "version": "1.0.0",
+  "description": "A simple time tracking app with multiple timers",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "npm run compile && electron-builder"
+  },
+  "author": "Lukas Gerbenis",
+  "private": true,
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "source-map-support": "0.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "electron": "1.7.9",
+    "electron-builder": "19.42.1",
+    "electron-webpack": "1.10.1",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "node-sass": "4.6.1",
+    "sass-loader": "6.0.6",
+    "source-map": "0.6.1",
+    "webpack": "3.8.1"
+  },
+  "build": {
+    "appId": "com.gerbenis.timerapp",
+    "productName": "Timer App",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": "ia32"
+        },
+
+        {
+          "target": "portable",
+          "arch": "ia32"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "electronWebpack": {
+    "title": "Timer App",
+    "main": {
+      "sourceDirectory": ".",
+      "webpackConfig": "webpack.config.map.js"
+    },
+    "renderer": {
+      "sourceDirectory": "app/js",
+      "webpackConfig": "webpack.config.map.js"
+    }
+  }
+}

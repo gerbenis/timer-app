@@ -1,0 +1,25 @@
+.btn {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  margin-left: 5px;
+  outline: none;
+
+  circle {
+    fill: $geyser;
+    transition: fill 0.3s ease-in-out;
+  }
+  path {
+    fill: $white;
+  }
+
+  &.btn--play {
+    @include button($lima, $christi);
+  }
+  &.btn--pause {
+    @include button($buttercup, $gamboge);
+  }
+  &.btn--stop {
+    @include button($french-rose, $cabaret);
+  }
+}
