@@ -163,6 +163,16 @@ class Timers extends React.Component {
     });
   }
 
+  calculateTotal() {
+    const totalInSeconds = this.state.timers
+      .reduce(
+        (totalTime, timerTime) => totalTime + timerTime.time,
+        0,
+      );
+
+    return formatTime(totalInSeconds);
+  }
+
   render() {
     const timers = this.state.timers.map(x => (
       <Timer
@@ -184,6 +194,18 @@ class Timers extends React.Component {
       <div>
         {timers}
         <NewTimer onSubmit={this.addTimer} />
+        <div>
+          <div>
+            <span>Total:</span>
+          </div>
+          <div className="card totals">
+            <span
+              className="input input__title"
+            >
+              { this.calculateTotal() }
+            </span>
+          </div>
+        </div>
       </div>
     );
   }
