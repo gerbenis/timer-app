@@ -1,4 +1,6 @@
 import React from 'react';
 import Timers from './Timers';
 
-export default () => (<Timers />);
+const App = () => (<Timers />);
+
+export default App;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Timer from './Timer';
 import NewTimer from './NewTimer';
 import {
@@ -181,10 +181,10 @@ class Timers extends React.Component {
       />));
 
     return (
-      <div>
+      <Fragment>
         {timers}
         <NewTimer onSubmit={this.addTimer} />
-      </div>
+      </Fragment>
     );
   }
 }

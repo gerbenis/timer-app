@@ -1,13 +1,23 @@
-// eslint-disable-next-line
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { app, BrowserWindow } from 'electron';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 let mainWindow;
 
+const installExtensions = async () => {
+  // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+  const installer = require('electron-devtools-installer');
+  const extensions = ['REACT_DEVELOPER_TOOLS'];
+
+  return Promise
+    .all(extensions.map(name => installer.default(installer[name])));
+};
+
 const createWindow = () => {
   mainWindow = new BrowserWindow({ width: 550, height: 600 });
+  const port = process.env.PORT || 1212;
   const url = isDevelopment
-    ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
+    ? `http://localhost:${port}/`
     : `file://${__dirname}/index.html`;
 
   if (isDevelopment) {
@@ -30,7 +40,13 @@ const createWindow = () => {
   return mainWindow;
 };
 
-app.on('ready', createWindow);
+app.on('ready', async () => {
+  if (isDevelopment) {
+    await installExtensions();
+  }
+
+  createWindow();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
