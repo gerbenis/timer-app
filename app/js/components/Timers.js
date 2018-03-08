@@ -16,6 +16,8 @@ class Timers extends React.Component {
       timers: [],
     };
 
+    this.loadData = this.loadData.bind(this);
+    this.saveData = this.saveData.bind(this);
     this.incrementTimer = this.incrementTimer.bind(this);
     this.toggleTimer = this.toggleTimer.bind(this);
     this.addTimer = this.addTimer.bind(this);
@@ -25,12 +27,39 @@ class Timers extends React.Component {
     this.changeTime = this.changeTime.bind(this);
   }
 
-  componentWillUnmount() {
-    this.state.timers.forEach((timer) => {
-      if (timer.intervalId) {
-        clearInterval(timer.intervalId);
-      }
-    });
+  componentDidMount() {
+    window.onbeforeunload = this.saveData;
+    this.loadData();
+  }
+
+  loadData() {
+    const dataString = window.localStorage.getItem('data');
+
+    if (dataString) {
+      const data = JSON.parse(dataString).map(x => ({
+        id: x.id,
+        title: x.title,
+        time: x.time,
+        timeString: formatTime(x.time),
+        intervalId: null,
+        displayAsDecimal: false,
+        isValid: true,
+      }));
+
+      this.setState({
+        timers: data,
+      });
+    }
+  }
+
+  saveData() {
+    const data = JSON.stringify(this.state.timers.map(x => ({
+      id: x.id,
+      title: x.title,
+      time: x.time,
+    })));
+
+    window.localStorage.setItem('data', data);
   }
 
   incrementTimer(timerId) {
