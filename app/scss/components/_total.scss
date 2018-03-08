@@ -1,0 +1,11 @@
+.total-container {
+  padding-top: 10px;
+  border-top: 3px solid #b3b3b3;
+
+  display: flex;
+  justify-content: flex-end;
+
+  span {
+    margin-right: 10px;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Timer from './Timer';
 import NewTimer from './NewTimer';
+import Total from './Total';
 import {
   formatTime,
   formatTimeDecimal,
@@ -192,16 +193,6 @@ class Timers extends React.Component {
     });
   }
 
-  calculateTotal() {
-    const totalInSeconds = this.state.timers
-      .reduce(
-        (totalTime, timerTime) => totalTime + timerTime.time,
-        0,
-      );
-
-    return formatTime(totalInSeconds);
-  }
-
   render() {
     const timers = this.state.timers.map(x => (
       <Timer
@@ -221,17 +212,14 @@ class Timers extends React.Component {
 
     return (
       <Fragment>
-        {timers}
-        <NewTimer onSubmit={this.addTimer} />
-        <div>
-          <span>Total:</span>
-        </div>
-        <div className="card totals">
-          <span
-            className="input input__title"
-          >
-            { this.calculateTotal() }
-          </span>
+        <div className="app-container">
+          <div className="timers-container">
+            {timers}
+            <NewTimer onSubmit={this.addTimer} />
+          </div>
+          <Total
+            timers={this.state.timers}
+          />
         </div>
       </Fragment>
     );

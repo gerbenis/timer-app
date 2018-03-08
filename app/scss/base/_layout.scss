@@ -1,5 +1,27 @@
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 10px;
   background-color: $mystic;
+  height: calc(100% - 20px);
+}
+
+#app {
+  height: 100%;
+}
+
+.app-container {
+  height: 100%;
+  display: flex;
+
+  flex-direction: column; 
+}
+
+.timers-container {
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: scroll;
 }
